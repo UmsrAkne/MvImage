@@ -6,7 +6,7 @@ namespace MvImage.ViewModels
     // ReSharper disable once ClassNeverInstantiated.Global
     public class MainWindowViewModel : BindableBase
     {
-        private TextWrapper title;
+        private TextWrapper title = new ();
 
         public TextWrapper Title { get => title; set => SetProperty(ref title, value); }
     }

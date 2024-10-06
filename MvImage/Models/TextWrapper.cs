@@ -26,6 +26,11 @@ namespace MvImage.Models
 
         private string Version { get => version; set => SetProperty(ref version, value); }
 
+        public override string ToString()
+        {
+            return Title;
+        }
+
         [Conditional("RELEASE")]
         private void SetVersion()
         {
