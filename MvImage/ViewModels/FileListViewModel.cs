@@ -25,7 +25,11 @@ namespace MvImage.ViewModels
         public DirectoryInfoWrapper CurrentDirectory
         {
             get => currentDirectory;
-            set => SetProperty(ref currentDirectory, value);
+            set
+            {
+                SetProperty(ref currentDirectory, value);
+                Files = new ObservableCollection<IFileInfo>(LoadFiles(currentDirectory.FullName));
+            }
         }
 
         public ObservableCollection<IFileInfo> Files { get; set; } = new ();
