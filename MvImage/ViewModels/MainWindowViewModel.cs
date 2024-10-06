@@ -1,4 +1,5 @@
-﻿using MvImage.Models;
+﻿using System;
+using MvImage.Models;
 using Prism.Ioc;
 using Prism.Mvvm;
 
@@ -8,6 +9,12 @@ namespace MvImage.ViewModels
     public class MainWindowViewModel : BindableBase
     {
         private TextWrapper title = new ();
+
+        [Obsolete("このコンストラクタはデザイン時に利用するためのものです。明示的に呼び出さないでください。")]
+        public MainWindowViewModel()
+        {
+            FileListViewModel = new DummyFileListViewModel();
+        }
 
         public MainWindowViewModel(IContainerProvider containerProvider)
         {

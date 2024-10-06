@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using Prism.Mvvm;
 
@@ -13,5 +14,7 @@ namespace MvImage.ViewModels
             get => currentDirectory;
             set => SetProperty(ref currentDirectory, value);
         }
+
+        public ObservableCollection<IFileInfo> Files { get; set; } = new ();
     }
 }
