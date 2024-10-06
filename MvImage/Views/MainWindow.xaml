@@ -48,6 +48,7 @@
             Grid.Row="1"
             Grid.Column="1"
             Width="4"
+            HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
 
         <Image Grid.Row="1" Grid.Column="2" />
