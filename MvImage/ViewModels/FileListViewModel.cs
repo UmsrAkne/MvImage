@@ -9,8 +9,18 @@ namespace MvImage.ViewModels
     // ReSharper disable once ClassNeverInstantiated.Global
     public class FileListViewModel : BindableBase, IFileListViewModel
     {
-        private readonly IFileSystem fileSystem = new FileSystem();
+        private readonly IFileSystem fileSystem;
         private DirectoryInfoWrapper currentDirectory;
+
+        public FileListViewModel(IFileSystem fileSystem)
+        {
+            this.fileSystem = fileSystem;
+        }
+
+        public FileListViewModel()
+        {
+            fileSystem = new FileSystem();
+        }
 
         public DirectoryInfoWrapper CurrentDirectory
         {
