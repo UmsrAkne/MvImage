@@ -43,7 +43,15 @@
             Grid.Row="1"
             Grid.Column="0"
             ItemsSource="{Binding FileListViewModel.Files}"
-            SelectedItem="{Binding FileListViewModel.SelectedFile}" />
+            SelectedItem="{Binding FileListViewModel.SelectedFile}">
+            <ListBox.ItemTemplate>
+                <DataTemplate DataType="{x:Type viewModels:ExtendedFileInfo}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding FileInfo.Name}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
 
         <GridSplitter
             Grid.Row="1"

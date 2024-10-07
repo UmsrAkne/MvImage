@@ -12,7 +12,7 @@ namespace MvImage.ViewModels
     public class DummyFileListViewModel : BindableBase, IFileListViewModel
     {
         private DirectoryInfoWrapper currentDirectory;
-        private ObservableCollection<IFileInfo> files;
+        private ObservableCollection<ExtendedFileInfo> files;
         private IFileSystem fileSystem;
         private IFileInfo selectedFile;
         private string destinationPathText;
@@ -21,17 +21,17 @@ namespace MvImage.ViewModels
         public DummyFileListViewModel()
         {
             fileSystem = new FileSystem();
-            Files = new ObservableCollection<IFileInfo>
+            Files = new ObservableCollection<ExtendedFileInfo>
             {
-                fileSystem.FileInfo.New("test001.png"),
-                fileSystem.FileInfo.New("test002.png"),
-                fileSystem.FileInfo.New("test003.png"),
-                fileSystem.FileInfo.New("test004.png"),
-                fileSystem.FileInfo.New("test005.png"),
-                fileSystem.FileInfo.New("test006.png"),
-                fileSystem.FileInfo.New("test007.png"),
-                fileSystem.FileInfo.New("test008.png"),
-                fileSystem.FileInfo.New("test009.png"),
+                new (fileSystem.FileInfo.New("test001.png")),
+                new (fileSystem.FileInfo.New("test002.png")),
+                new (fileSystem.FileInfo.New("test003.png")),
+                new (fileSystem.FileInfo.New("test004.png")),
+                new (fileSystem.FileInfo.New("test005.png")),
+                new (fileSystem.FileInfo.New("test006.png")),
+                new (fileSystem.FileInfo.New("test007.png")),
+                new (fileSystem.FileInfo.New("test008.png")),
+                new (fileSystem.FileInfo.New("test009.png")),
             };
         }
 
@@ -41,11 +41,11 @@ namespace MvImage.ViewModels
             set
             {
                 SetProperty(ref currentDirectory, value);
-                Files = new ObservableCollection<IFileInfo>(LoadFiles(currentDirectory.FullName));
+                Files = new ObservableCollection<ExtendedFileInfo>(LoadFiles(currentDirectory.FullName));
             }
         }
 
-        public ObservableCollection<IFileInfo> Files { get => files; set => SetProperty(ref files, value); }
+        public ObservableCollection<ExtendedFileInfo> Files { get => files; set => SetProperty(ref files, value); }
 
         public IFileInfo SelectedFile { get => selectedFile; set => SetProperty(ref selectedFile, value); }
 
@@ -70,19 +70,19 @@ namespace MvImage.ViewModels
             AddDestinationDirectory(DestinationPathText);
         });
 
-        public IEnumerable<IFileInfo> LoadFiles(string directoryPath)
+        public IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath)
         {
-            return new List<IFileInfo>()
+            return new List<ExtendedFileInfo>()
             {
-                fileSystem.FileInfo.New($"{directoryPath}_test001.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test002.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test003.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test004.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test005.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test006.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test007.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test008.png"),
-                fileSystem.FileInfo.New($"{directoryPath}_test009.png"),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test001.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test002.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test003.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test004.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test005.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test006.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test007.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test008.png")),
+                new (fileSystem.FileInfo.New($"{directoryPath}_test009.png")),
             };
         }
 

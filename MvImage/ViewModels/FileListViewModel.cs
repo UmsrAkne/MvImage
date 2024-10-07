@@ -17,7 +17,7 @@ namespace MvImage.ViewModels
         private DirectoryInfoWrapper currentDirectory;
         private IFileInfo selectedFile;
         private string previewImageFilePath = string.Empty;
-        private ObservableCollection<IFileInfo> files = new ();
+        private ObservableCollection<ExtendedFileInfo> files = new ();
         private Visibility previewImageVisibility;
         private ObservableCollection<IDirectoryInfo> destinationDirectories = new ();
         private string destinationPathText = string.Empty;
@@ -39,11 +39,11 @@ namespace MvImage.ViewModels
             set
             {
                 SetProperty(ref currentDirectory, value);
-                Files = new ObservableCollection<IFileInfo>(LoadFiles(currentDirectory.FullName));
+                Files = new ObservableCollection<ExtendedFileInfo>(LoadFiles(currentDirectory.FullName));
             }
         }
 
-        public ObservableCollection<IFileInfo> Files { get => files; set => SetProperty(ref files, value); }
+        public ObservableCollection<ExtendedFileInfo> Files { get => files; set => SetProperty(ref files, value); }
 
         public ObservableCollection<IDirectoryInfo> DestinationDirectories
         {
@@ -105,11 +105,11 @@ namespace MvImage.ViewModels
             AddDestinationDirectory(DestinationPathText);
         });
 
-        public IEnumerable<IFileInfo> LoadFiles(string directoryPath)
+        public IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath)
         {
             return fileSystem.Directory.GetFiles(directoryPath)
-                .Select(p => fileSystem.FileInfo.New(p))
-                .Where(f => f.Extension == ".safetensors");
+                .Select(p => new ExtendedFileInfo(fileSystem.FileInfo.New(p)))
+                .Where(f => f.FileInfo.Extension == ".safetensors");
         }
 
         public void AddDestinationDirectory(string directoryPath)

@@ -10,7 +10,7 @@ namespace MvImage.ViewModels
     {
         DirectoryInfoWrapper CurrentDirectory { get; set; }
 
-        ObservableCollection<IFileInfo> Files { get; set; }
+        ObservableCollection<ExtendedFileInfo> Files { get; set; }
 
         IFileInfo SelectedFile { get; set; }
 
@@ -24,7 +24,7 @@ namespace MvImage.ViewModels
 
         public DelegateCommand AddDestinationDirectoryCommand { get; }
 
-        IEnumerable<IFileInfo> LoadFiles(string directoryPath);
+        IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath);
 
         void AddDestinationDirectory(string directoryPath);
     }
