@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Windows;
+using Prism.Commands;
 using Prism.Mvvm;
 
 namespace MvImage.ViewModels
@@ -14,6 +15,8 @@ namespace MvImage.ViewModels
         private ObservableCollection<IFileInfo> files;
         private IFileSystem fileSystem;
         private IFileInfo selectedFile;
+        private string destinationPathText;
+        private ObservableCollection<IDirectoryInfo> destinationDirectories = new ();
 
         public DummyFileListViewModel()
         {
@@ -50,6 +53,23 @@ namespace MvImage.ViewModels
 
         public Visibility PreviewImageVisibility { get; set; }
 
+        public string DestinationPathText
+        {
+            get => destinationPathText;
+            set => SetProperty(ref destinationPathText, value);
+        }
+
+        public ObservableCollection<IDirectoryInfo> DestinationDirectories
+        {
+            get => destinationDirectories;
+            set => SetProperty(ref destinationDirectories, value);
+        }
+
+        public DelegateCommand AddDestinationDirectoryCommand => new DelegateCommand(() =>
+        {
+            AddDestinationDirectory(DestinationPathText);
+        });
+
         public IEnumerable<IFileInfo> LoadFiles(string directoryPath)
         {
             return new List<IFileInfo>()
@@ -64,6 +84,14 @@ namespace MvImage.ViewModels
                 fileSystem.FileInfo.New($"{directoryPath}_test008.png"),
                 fileSystem.FileInfo.New($"{directoryPath}_test009.png"),
             };
+        }
+
+        public void AddDestinationDirectory(string directoryPath)
+        {
+            if (DestinationDirectories.All(d => d.FullName != directoryPath))
+            {
+                DestinationDirectories.Add(fileSystem.DirectoryInfo.New(directoryPath));
+            }
         }
     }
 }

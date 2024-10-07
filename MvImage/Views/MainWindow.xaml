@@ -78,9 +78,13 @@
                 Grid.Row="0"
                 Grid.Column="0"
                 Grid.ColumnSpan="2"
-                Margin="0,5" />
+                Margin="0,5"
+                ItemsSource="{Binding FileListViewModel.DestinationDirectories}" />
 
-            <TextBox Grid.Row="1" Grid.Column="0" />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="{Binding FileListViewModel.DestinationPathText}" />
 
             <Button
                 Grid.Row="1"
@@ -88,6 +92,7 @@
                 Margin="5,0"
                 Padding="10,3"
                 HorizontalAlignment="Right"
+                Command="{Binding FileListViewModel.AddDestinationDirectoryCommand}"
                 Content="出力先を追加" />
 
         </Grid>
