@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using System.Linq;
+using System.Windows;
 using Prism.Mvvm;
 
 namespace MvImage.ViewModels
@@ -46,6 +47,8 @@ namespace MvImage.ViewModels
         public IFileInfo SelectedFile { get => selectedFile; set => SetProperty(ref selectedFile, value); }
 
         public string PreviewImageFilePath { get; set; }
+
+        public Visibility PreviewImageVisibility { get; set; }
 
         public IEnumerable<IFileInfo> LoadFiles(string directoryPath)
         {

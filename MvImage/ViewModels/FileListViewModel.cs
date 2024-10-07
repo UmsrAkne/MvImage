@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
+using System.Windows;
 using Prism.Mvvm;
 
 namespace MvImage.ViewModels
@@ -16,6 +17,7 @@ namespace MvImage.ViewModels
         private IFileInfo selectedFile;
         private string previewImageFilePath;
         private ObservableCollection<IFileInfo> files = new ();
+        private Visibility previewImageVisibility;
 
         public FileListViewModel(IFileSystem fileSystem)
         {
@@ -53,6 +55,11 @@ namespace MvImage.ViewModels
                 if (!string.IsNullOrWhiteSpace(imgFilePath))
                 {
                     PreviewImageFilePath = imgFilePath;
+                    PreviewImageVisibility = Visibility.Visible;
+                }
+                else
+                {
+                    PreviewImageVisibility = Visibility.Hidden;
                 }
 
                 SetProperty(ref selectedFile, value);
@@ -63,6 +70,12 @@ namespace MvImage.ViewModels
         {
             get => previewImageFilePath;
             set => SetProperty(ref previewImageFilePath, value);
+        }
+
+        public Visibility PreviewImageVisibility
+        {
+            get => previewImageVisibility;
+            set => SetProperty(ref previewImageVisibility, value);
         }
 
         public IEnumerable<IFileInfo> LoadFiles(string directoryPath)

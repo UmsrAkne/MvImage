@@ -55,7 +55,8 @@
         <Image
             Grid.Row="1"
             Grid.Column="2"
-            Source="{Binding FileListViewModel.PreviewImageFilePath}" />
+            Source="{Binding FileListViewModel.PreviewImageFilePath}"
+            Visibility="{Binding FileListViewModel.PreviewImageVisibility}" />
 
         <DockPanel Grid.Row="2" Grid.Column="0" />
     </Grid>

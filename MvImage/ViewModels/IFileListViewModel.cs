@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Abstractions;
+using System.Windows;
 
 namespace MvImage.ViewModels
 {
@@ -13,6 +14,8 @@ namespace MvImage.ViewModels
         IFileInfo SelectedFile { get; set; }
 
         string PreviewImageFilePath { get; set; }
+
+        Visibility PreviewImageVisibility { get; set; }
 
         IEnumerable<IFileInfo> LoadFiles(string directoryPath);
     }
