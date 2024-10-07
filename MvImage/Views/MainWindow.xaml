@@ -46,9 +46,17 @@
             SelectedItem="{Binding FileListViewModel.SelectedFile}">
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModels:ExtendedFileInfo}">
-                    <StackPanel Orientation="Horizontal">
+                    <DockPanel Margin="0,1">
+                        <CheckBox
+                            Margin="0,0,8,0"
+                            VerticalAlignment="Center"
+                            IsChecked="{Binding IsChecked}">
+                            <CheckBox.RenderTransform>
+                                <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
+                            </CheckBox.RenderTransform>
+                        </CheckBox>
                         <TextBlock Text="{Binding FileInfo.Name}" />
-                    </StackPanel>
+                    </DockPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
