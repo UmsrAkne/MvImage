@@ -1,7 +1,7 @@
-﻿using Prism.Ioc;
-using MvImage.Views;
-using System.Windows;
+﻿using System.Windows;
 using MvImage.ViewModels;
+using MvImage.Views;
+using Prism.Ioc;
 
 namespace MvImage
 {
