@@ -21,7 +21,6 @@ namespace MvImage.ViewModels
         private Visibility previewImageVisibility;
         private ObservableCollection<IDirectoryInfo> destinationDirectories = new ();
         private string destinationPathText = string.Empty;
-        private ObservableCollection<IDirectoryInfo> destinationDirectories1 = new ();
 
         public FileListViewModel(IFileSystem fileSystem)
         {
@@ -47,8 +46,8 @@ namespace MvImage.ViewModels
 
         public ObservableCollection<IDirectoryInfo> DestinationDirectories
         {
-            get => destinationDirectories1;
-            set => SetProperty(ref destinationDirectories1, value);
+            get => destinationDirectories;
+            set => SetProperty(ref destinationDirectories, value);
         }
 
         public IFileInfo SelectedFile
