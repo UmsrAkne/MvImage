@@ -15,7 +15,7 @@ namespace MvImage.ViewModels
         private readonly IFileSystem fileSystem;
         private DirectoryInfoWrapper currentDirectory;
         private IFileInfo selectedFile;
-        private string previewImageFilePath;
+        private string previewImageFilePath = string.Empty;
         private ObservableCollection<IFileInfo> files = new ();
         private Visibility previewImageVisibility;
 
@@ -46,6 +46,14 @@ namespace MvImage.ViewModels
             get => selectedFile;
             set
             {
+                SetProperty(ref selectedFile, value);
+
+                if (value == null)
+                {
+                    PreviewImageVisibility = Visibility.Hidden;
+                    return;
+                }
+
                 // 同名の画像ファイルが有るかを探す。
                 var fileNameWe = Path.GetFileNameWithoutExtension(value.FullName);
                 var imgFilePath = fileSystem.Directory.GetFiles(CurrentDirectory.FullName)
@@ -61,8 +69,6 @@ namespace MvImage.ViewModels
                 {
                     PreviewImageVisibility = Visibility.Hidden;
                 }
-
-                SetProperty(ref selectedFile, value);
             }
         }
 
