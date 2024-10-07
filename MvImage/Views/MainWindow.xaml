@@ -42,7 +42,8 @@
         <ListBox
             Grid.Row="1"
             Grid.Column="0"
-            ItemsSource="{Binding FileListViewModel.Files}" />
+            ItemsSource="{Binding FileListViewModel.Files}"
+            SelectedItem="{Binding FileListViewModel.SelectedFile}" />
 
         <GridSplitter
             Grid.Row="1"
@@ -51,7 +52,11 @@
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch" />
 
-        <Image Grid.Row="1" Grid.Column="2" />
+        <Image
+            Grid.Row="1"
+            Grid.Column="2"
+            Source="{Binding FileListViewModel.PreviewImageFilePath}"
+            Visibility="{Binding FileListViewModel.PreviewImageVisibility}" />
 
         <DockPanel Grid.Row="2" Grid.Column="0" />
     </Grid>
