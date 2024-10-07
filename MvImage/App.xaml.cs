@@ -1,6 +1,7 @@
-﻿using Prism.Ioc;
+﻿using System.Windows;
+using MvImage.ViewModels;
 using MvImage.Views;
-using System.Windows;
+using Prism.Ioc;
 
 namespace MvImage
 {
@@ -16,6 +17,11 @@ namespace MvImage
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            #if RELEASE
+            containerRegistry.RegisterSingleton<IFileListViewModel, FileListViewModel>();
+            #else
+            containerRegistry.RegisterSingleton<IFileListViewModel, DummyFileListViewModel>();
+            #endif
         }
     }
 }
