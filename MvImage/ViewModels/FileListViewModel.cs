@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Windows;
+using Prism.Commands;
 using Prism.Mvvm;
 
 namespace MvImage.ViewModels
@@ -18,6 +19,9 @@ namespace MvImage.ViewModels
         private string previewImageFilePath = string.Empty;
         private ObservableCollection<IFileInfo> files = new ();
         private Visibility previewImageVisibility;
+        private ObservableCollection<IDirectoryInfo> destinationDirectories = new ();
+        private string destinationPathText = string.Empty;
+        private ObservableCollection<IDirectoryInfo> destinationDirectories1 = new ();
 
         public FileListViewModel(IFileSystem fileSystem)
         {
@@ -40,6 +44,12 @@ namespace MvImage.ViewModels
         }
 
         public ObservableCollection<IFileInfo> Files { get => files; set => SetProperty(ref files, value); }
+
+        public ObservableCollection<IDirectoryInfo> DestinationDirectories
+        {
+            get => destinationDirectories1;
+            set => SetProperty(ref destinationDirectories1, value);
+        }
 
         public IFileInfo SelectedFile
         {
@@ -84,11 +94,30 @@ namespace MvImage.ViewModels
             set => SetProperty(ref previewImageVisibility, value);
         }
 
+        public string DestinationPathText
+        {
+            get => destinationPathText;
+            set => SetProperty(ref destinationPathText, value);
+        }
+
+        public DelegateCommand AddDestinationDirectoryCommand => new DelegateCommand(() =>
+        {
+            AddDestinationDirectory(DestinationPathText);
+        });
+
         public IEnumerable<IFileInfo> LoadFiles(string directoryPath)
         {
             return fileSystem.Directory.GetFiles(directoryPath)
                 .Select(p => fileSystem.FileInfo.New(p))
                 .Where(f => f.Extension == ".safetensors");
+        }
+
+        public void AddDestinationDirectory(string directoryPath)
+        {
+            if (DestinationDirectories.All(d => d.FullName != directoryPath))
+            {
+                DestinationDirectories.Add(fileSystem.DirectoryInfo.New(directoryPath));
+            }
         }
     }
 }

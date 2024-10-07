@@ -55,9 +55,47 @@
         <Image
             Grid.Row="1"
             Grid.Column="2"
-            Source="{Binding FileListViewModel.PreviewImageFilePath}"
+            Source="{Binding FileListViewModel.PreviewImageFilePath, TargetNullValue={x:Null}}"
             Visibility="{Binding FileListViewModel.PreviewImageVisibility}" />
 
-        <DockPanel Grid.Row="2" Grid.Column="0" />
+        <Grid
+            Grid.Row="2"
+            Grid.Column="0"
+            Grid.ColumnSpan="3"
+            Margin="5">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <ComboBox
+                Grid.Row="0"
+                Grid.Column="0"
+                Grid.ColumnSpan="2"
+                Margin="0,5"
+                ItemsSource="{Binding FileListViewModel.DestinationDirectories}" />
+
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="0"
+                Text="{Binding FileListViewModel.DestinationPathText}" />
+
+            <Button
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5,0"
+                Padding="10,3"
+                HorizontalAlignment="Right"
+                Command="{Binding FileListViewModel.AddDestinationDirectoryCommand}"
+                Content="出力先を追加" />
+
+        </Grid>
+
     </Grid>
 </Window>
