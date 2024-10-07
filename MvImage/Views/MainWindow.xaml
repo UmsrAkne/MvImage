@@ -42,8 +42,21 @@
         <ListBox
             Grid.Row="1"
             Grid.Column="0"
+            HorizontalContentAlignment="Stretch"
+            AlternationCount="2"
             ItemsSource="{Binding FileListViewModel.Files}"
             SelectedItem="{Binding FileListViewModel.SelectedFile}">
+
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="#EEEEEE" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListBox.ItemContainerStyle>
+
             <ListBox.ItemTemplate>
                 <DataTemplate DataType="{x:Type viewModels:ExtendedFileInfo}">
                     <DockPanel Margin="0,1">
