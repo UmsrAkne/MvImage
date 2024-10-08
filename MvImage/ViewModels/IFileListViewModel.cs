@@ -20,7 +20,7 @@ namespace MvImage.ViewModels
 
         string DestinationPathText { get; set; }
 
-        ObservableCollection<IDirectoryInfo> DestinationDirectories { get; set; }
+        ObservableCollection<ExtendedDirectoryInfo> DestinationDirectories { get; set; }
 
         public DelegateCommand AddDestinationDirectoryCommand { get; }
 

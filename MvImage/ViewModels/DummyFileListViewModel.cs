@@ -16,7 +16,7 @@ namespace MvImage.ViewModels
         private IFileSystem fileSystem;
         private IFileInfo selectedFile;
         private string destinationPathText;
-        private ObservableCollection<IDirectoryInfo> destinationDirectories = new ();
+        private ObservableCollection<ExtendedDirectoryInfo> destinationDirectories = new ();
 
         public DummyFileListViewModel()
         {
@@ -59,7 +59,7 @@ namespace MvImage.ViewModels
             set => SetProperty(ref destinationPathText, value);
         }
 
-        public ObservableCollection<IDirectoryInfo> DestinationDirectories
+        public ObservableCollection<ExtendedDirectoryInfo> DestinationDirectories
         {
             get => destinationDirectories;
             set => SetProperty(ref destinationDirectories, value);
@@ -88,9 +88,9 @@ namespace MvImage.ViewModels
 
         public void AddDestinationDirectory(string directoryPath)
         {
-            if (DestinationDirectories.All(d => d.FullName != directoryPath))
+            if (DestinationDirectories.All(d => d.DirectoryInfo.FullName != directoryPath))
             {
-                DestinationDirectories.Add(fileSystem.DirectoryInfo.New(directoryPath));
+                DestinationDirectories.Add(new ExtendedDirectoryInfo(fileSystem.DirectoryInfo.New(directoryPath)));
             }
         }
     }
