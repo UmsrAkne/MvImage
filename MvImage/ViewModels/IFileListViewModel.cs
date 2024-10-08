@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using System.Windows;
 using MvImage.Models;
-using Prism.Commands;
 
 namespace MvImage.ViewModels
 {
@@ -13,7 +12,7 @@ namespace MvImage.ViewModels
 
         ObservableCollection<ExtendedFileInfo> Files { get; set; }
 
-        IFileInfo SelectedFile { get; set; }
+        ExtendedFileInfo SelectedFile { get; set; }
 
         string PreviewImageFilePath { get; set; }
 

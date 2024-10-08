@@ -14,7 +14,7 @@ namespace MvImage.ViewModels
         private DirectoryInfoWrapper currentDirectory;
         private ObservableCollection<ExtendedFileInfo> files;
         private IFileSystem fileSystem;
-        private IFileInfo selectedFile;
+        private ExtendedFileInfo selectedFile;
         private string destinationPathText;
         private ObservableCollection<ExtendedDirectoryInfo> destinationDirectories = new ();
 
@@ -47,7 +47,7 @@ namespace MvImage.ViewModels
 
         public ObservableCollection<ExtendedFileInfo> Files { get => files; set => SetProperty(ref files, value); }
 
-        public IFileInfo SelectedFile { get => selectedFile; set => SetProperty(ref selectedFile, value); }
+        public ExtendedFileInfo SelectedFile { get => selectedFile; set => SetProperty(ref selectedFile, value); }
 
         public string PreviewImageFilePath { get; set; }
 
