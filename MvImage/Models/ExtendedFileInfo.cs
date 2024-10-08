@@ -1,7 +1,7 @@
 using System.IO.Abstractions;
 using Prism.Mvvm;
 
-namespace MvImage.ViewModels
+namespace MvImage.Models
 {
     public class ExtendedFileInfo : BindableBase
     {

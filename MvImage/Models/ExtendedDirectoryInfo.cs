@@ -1,6 +1,6 @@
 using System.IO.Abstractions;
 
-namespace MvImage.ViewModels
+namespace MvImage.Models
 {
     public class ExtendedDirectoryInfo
     {

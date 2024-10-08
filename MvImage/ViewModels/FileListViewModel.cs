@@ -5,6 +5,7 @@ using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Windows;
+using MvImage.Models;
 using Prism.Commands;
 using Prism.Mvvm;
 
