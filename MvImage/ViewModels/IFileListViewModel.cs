@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO.Abstractions;
 using System.Windows;
-using Prism.Commands;
+using MvImage.Models;
 
 namespace MvImage.ViewModels
 {
@@ -12,7 +12,7 @@ namespace MvImage.ViewModels
 
         ObservableCollection<ExtendedFileInfo> Files { get; set; }
 
-        IFileInfo SelectedFile { get; set; }
+        ExtendedFileInfo SelectedFile { get; set; }
 
         string PreviewImageFilePath { get; set; }
 
@@ -20,12 +20,8 @@ namespace MvImage.ViewModels
 
         string DestinationPathText { get; set; }
 
-        ObservableCollection<IDirectoryInfo> DestinationDirectories { get; set; }
-
-        public DelegateCommand AddDestinationDirectoryCommand { get; }
+        DirectoryInfoInputArea DirectoryInfoInputArea { get; set; }
 
         IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath);
-
-        void AddDestinationDirectory(string directoryPath);
     }
 }

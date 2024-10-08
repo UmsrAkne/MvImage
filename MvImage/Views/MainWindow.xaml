@@ -5,6 +5,7 @@
     xmlns:converters="clr-namespace:MvImage.Views.Converters"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="clr-namespace:MvImage.Models"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:viewModels="clr-namespace:MvImage.ViewModels"
     Title="{Binding Title}"
@@ -58,16 +59,22 @@
             </ListBox.ItemContainerStyle>
 
             <ListBox.ItemTemplate>
-                <DataTemplate DataType="{x:Type viewModels:ExtendedFileInfo}">
+                <DataTemplate DataType="{x:Type models:ExtendedFileInfo}">
                     <DockPanel Margin="0,1">
                         <CheckBox
-                            Margin="0,0,8,0"
+                            Margin="0,0,4,0"
                             VerticalAlignment="Center"
                             IsChecked="{Binding IsChecked}">
                             <CheckBox.RenderTransform>
                                 <ScaleTransform ScaleX="1.1" ScaleY="1.1" />
                             </CheckBox.RenderTransform>
                         </CheckBox>
+
+                        <TextBlock
+                            Width="30"
+                            HorizontalAlignment="Stretch"
+                            Text="{Binding KeyCharacter}"
+                            TextAlignment="Center" />
                         <TextBlock Text="{Binding FileInfo.Name}" />
                     </DockPanel>
                 </DataTemplate>
@@ -94,6 +101,7 @@
             Margin="5">
 
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
@@ -101,28 +109,66 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <ComboBox
                 Grid.Row="0"
                 Grid.Column="0"
-                Grid.ColumnSpan="2"
+                Grid.ColumnSpan="3"
                 Margin="0,5"
-                ItemsSource="{Binding FileListViewModel.DestinationDirectories}" />
+                ItemsSource="{Binding FileListViewModel.DirectoryInfoInputArea.DestinationDirectories}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type models:ExtendedDirectoryInfo}">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock
+                                Width="20"
+                                Margin="5,0"
+                                Text="{Binding KeyCharacter}"
+                                TextAlignment="Center" />
+                            <TextBlock Text="{Binding DirectoryInfo.FullName}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+
+            <StackPanel
+                Grid.Row="1"
+                Grid.Column="0"
+                Margin="5,0"
+                Orientation="Horizontal">
+
+                <TextBlock
+                    Margin="0,0,5,0"
+                    VerticalAlignment="Center"
+                    Text="Key char :" />
+                <TextBox
+                    Width="40"
+                    Margin="0,0,2,0"
+                    Text="{Binding FileListViewModel.DirectoryInfoInputArea.KeyCharacter}" />
+            </StackPanel>
 
             <TextBox
                 Grid.Row="1"
-                Grid.Column="0"
-                Text="{Binding FileListViewModel.DestinationPathText}" />
+                Grid.Column="1"
+                Text="{Binding FileListViewModel.DirectoryInfoInputArea.DirectoryPath}" />
 
             <Button
                 Grid.Row="1"
-                Grid.Column="1"
+                Grid.Column="2"
                 Margin="5,0"
                 Padding="10,3"
                 HorizontalAlignment="Right"
-                Command="{Binding FileListViewModel.AddDestinationDirectoryCommand}"
+                Command="{Binding FileListViewModel.DirectoryInfoInputArea.AddDestinationDirectoryCommand}"
                 Content="出力先を追加" />
+
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="5,12,5,5"
+                Padding="2"
+                Content="移動" />
 
         </Grid>
 

@@ -5,7 +5,7 @@ using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
 using System.Windows;
-using Prism.Commands;
+using MvImage.Models;
 using Prism.Mvvm;
 
 namespace MvImage.ViewModels
@@ -15,11 +15,11 @@ namespace MvImage.ViewModels
     {
         private readonly IFileSystem fileSystem;
         private DirectoryInfoWrapper currentDirectory;
-        private IFileInfo selectedFile;
+        private ExtendedFileInfo selectedFile;
         private string previewImageFilePath = string.Empty;
         private ObservableCollection<ExtendedFileInfo> files = new ();
         private Visibility previewImageVisibility;
-        private ObservableCollection<IDirectoryInfo> destinationDirectories = new ();
+        private ObservableCollection<ExtendedDirectoryInfo> destinationDirectories = new ();
         private string destinationPathText = string.Empty;
 
         public FileListViewModel(IFileSystem fileSystem)
@@ -44,13 +44,13 @@ namespace MvImage.ViewModels
 
         public ObservableCollection<ExtendedFileInfo> Files { get => files; set => SetProperty(ref files, value); }
 
-        public ObservableCollection<IDirectoryInfo> DestinationDirectories
+        public ObservableCollection<ExtendedDirectoryInfo> DestinationDirectories
         {
             get => destinationDirectories;
             set => SetProperty(ref destinationDirectories, value);
         }
 
-        public IFileInfo SelectedFile
+        public ExtendedFileInfo SelectedFile
         {
             get => selectedFile;
             set
@@ -64,7 +64,7 @@ namespace MvImage.ViewModels
                 }
 
                 // 同名の画像ファイルが有るかを探す。
-                var fileNameWe = Path.GetFileNameWithoutExtension(value.FullName);
+                var fileNameWe = Path.GetFileNameWithoutExtension(value.FileInfo.FullName);
                 var imgFilePath = fileSystem.Directory.GetFiles(CurrentDirectory.FullName)
                     .Where(p => string.Equals(Path.GetExtension(p), ".png", StringComparison.OrdinalIgnoreCase))
                     .FirstOrDefault(p => Path.GetFileNameWithoutExtension(p) == fileNameWe);
@@ -99,24 +99,13 @@ namespace MvImage.ViewModels
             set => SetProperty(ref destinationPathText, value);
         }
 
-        public DelegateCommand AddDestinationDirectoryCommand => new DelegateCommand(() =>
-        {
-            AddDestinationDirectory(DestinationPathText);
-        });
+        public DirectoryInfoInputArea DirectoryInfoInputArea { get; set; } = new (null);
 
         public IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath)
         {
             return fileSystem.Directory.GetFiles(directoryPath)
                 .Select(p => new ExtendedFileInfo(fileSystem.FileInfo.New(p)))
                 .Where(f => f.FileInfo.Extension == ".safetensors");
-        }
-
-        public void AddDestinationDirectory(string directoryPath)
-        {
-            if (DestinationDirectories.All(d => d.FullName != directoryPath))
-            {
-                DestinationDirectories.Add(fileSystem.DirectoryInfo.New(directoryPath));
-            }
         }
     }
 }
