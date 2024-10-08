@@ -23,8 +23,8 @@ namespace MvImage.ViewModels
             fileSystem = new FileSystem();
             Files = new ObservableCollection<ExtendedFileInfo>
             {
-                new (fileSystem.FileInfo.New("test001.png")),
-                new (fileSystem.FileInfo.New("test002.png")),
+                new (fileSystem.FileInfo.New("test001.png")) { KeyCharacter = 'a', },
+                new (fileSystem.FileInfo.New("test002.png")) { KeyCharacter = 'b', },
                 new (fileSystem.FileInfo.New("test003.png")),
                 new (fileSystem.FileInfo.New("test004.png")),
                 new (fileSystem.FileInfo.New("test005.png")),
