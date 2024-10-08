@@ -18,5 +18,7 @@ namespace MvImage.Models
         public bool IsChecked { get => isChecked; set => SetProperty(ref isChecked, value); }
 
         public char KeyCharacter { get => keyCharacter; set => SetProperty(ref keyCharacter, value); }
+
+        public bool LocationChanged { get; set; }
     }
 }

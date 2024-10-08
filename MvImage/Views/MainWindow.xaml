@@ -109,6 +109,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
 
             <ComboBox
@@ -160,6 +161,14 @@
                 HorizontalAlignment="Right"
                 Command="{Binding FileListViewModel.DirectoryInfoInputArea.AddDestinationDirectoryCommand}"
                 Content="出力先を追加" />
+
+            <Button
+                Grid.Row="2"
+                Grid.Column="0"
+                Grid.ColumnSpan="3"
+                Margin="5,12,5,5"
+                Padding="2"
+                Content="移動" />
 
         </Grid>
 
