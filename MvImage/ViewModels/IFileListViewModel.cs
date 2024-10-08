@@ -21,12 +21,8 @@ namespace MvImage.ViewModels
 
         string DestinationPathText { get; set; }
 
-        ObservableCollection<ExtendedDirectoryInfo> DestinationDirectories { get; set; }
-
-        public DelegateCommand AddDestinationDirectoryCommand { get; }
+        DirectoryInfoInputArea DirectoryInfoInputArea { get; set; }
 
         IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath);
-
-        void AddDestinationDirectory(string directoryPath);
     }
 }

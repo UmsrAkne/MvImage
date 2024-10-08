@@ -6,7 +6,6 @@ using System.IO.Abstractions;
 using System.Linq;
 using System.Windows;
 using MvImage.Models;
-using Prism.Commands;
 using Prism.Mvvm;
 
 namespace MvImage.ViewModels
@@ -100,24 +99,13 @@ namespace MvImage.ViewModels
             set => SetProperty(ref destinationPathText, value);
         }
 
-        public DelegateCommand AddDestinationDirectoryCommand => new DelegateCommand(() =>
-        {
-            AddDestinationDirectory(DestinationPathText);
-        });
+        public DirectoryInfoInputArea DirectoryInfoInputArea { get; set; } = new (null);
 
         public IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath)
         {
             return fileSystem.Directory.GetFiles(directoryPath)
                 .Select(p => new ExtendedFileInfo(fileSystem.FileInfo.New(p)))
                 .Where(f => f.FileInfo.Extension == ".safetensors");
-        }
-
-        public void AddDestinationDirectory(string directoryPath)
-        {
-            if (DestinationDirectories.All(d => d.DirectoryInfo.FullName != directoryPath))
-            {
-                DestinationDirectories.Add(new ExtendedDirectoryInfo(fileSystem.DirectoryInfo.New(directoryPath)));
-            }
         }
     }
 }
