@@ -46,7 +46,7 @@ namespace MvImage.ViewModels
                 KeyCharacter = KeyCharacter != '-' ? KeyCharacter : default,
             };
 
-            DestinationDirectories.Add(new ExtendedDirectoryInfo(fileSystem.DirectoryInfo.New(DirectoryPath)));
+            DestinationDirectories.Add(d);
             DirectoryPath = string.Empty;
             KeyCharacter = '-';
         });
