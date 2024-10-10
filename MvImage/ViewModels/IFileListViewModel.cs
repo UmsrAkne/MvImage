@@ -18,8 +18,6 @@ namespace MvImage.ViewModels
 
         Visibility PreviewImageVisibility { get; set; }
 
-        string DestinationPathText { get; set; }
-
         DirectoryInfoInputArea DirectoryInfoInputArea { get; set; }
 
         IEnumerable<ExtendedFileInfo> LoadFiles(string directoryPath);

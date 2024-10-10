@@ -34,7 +34,7 @@ namespace MvImage.Models
         [Conditional("RELEASE")]
         private void SetVersion()
         {
-            Version = "20241008" + "a";
+            Version = "20241010" + "a";
         }
 
         [Conditional("DEBUG")]

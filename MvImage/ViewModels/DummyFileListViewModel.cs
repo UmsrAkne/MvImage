@@ -14,8 +14,6 @@ namespace MvImage.ViewModels
         private ObservableCollection<ExtendedFileInfo> files;
         private IFileSystem fileSystem;
         private ExtendedFileInfo selectedFile;
-        private string destinationPathText;
-        private ObservableCollection<ExtendedDirectoryInfo> destinationDirectories = new ();
 
         public DummyFileListViewModel()
         {
@@ -31,6 +29,14 @@ namespace MvImage.ViewModels
                 new (fileSystem.FileInfo.New("test007.png")),
                 new (fileSystem.FileInfo.New("test008.png")),
                 new (fileSystem.FileInfo.New("test009.png")),
+            };
+
+            DirectoryInfoInputArea.DestinationDirectories = new ObservableCollection<ExtendedDirectoryInfo>
+            {
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = 'a', },
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = 'b', },
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = 'c', },
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = '-', },
             };
         }
 
@@ -51,18 +57,6 @@ namespace MvImage.ViewModels
         public string PreviewImageFilePath { get; set; }
 
         public Visibility PreviewImageVisibility { get; set; }
-
-        public string DestinationPathText
-        {
-            get => destinationPathText;
-            set => SetProperty(ref destinationPathText, value);
-        }
-
-        public ObservableCollection<ExtendedDirectoryInfo> DestinationDirectories
-        {
-            get => destinationDirectories;
-            set => SetProperty(ref destinationDirectories, value);
-        }
 
         public DirectoryInfoInputArea DirectoryInfoInputArea { get; set; } = new (null);
 
