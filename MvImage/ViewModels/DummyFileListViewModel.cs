@@ -32,6 +32,14 @@ namespace MvImage.ViewModels
                 new (fileSystem.FileInfo.New("test008.png")),
                 new (fileSystem.FileInfo.New("test009.png")),
             };
+
+            DirectoryInfoInputArea.DestinationDirectories = new ObservableCollection<ExtendedDirectoryInfo>
+            {
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = 'a', },
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = 'b', },
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = 'c', },
+                new (fileSystem.DirectoryInfo.New("testDir1")) { KeyCharacter = '-', },
+            };
         }
 
         public DirectoryInfoWrapper CurrentDirectory
