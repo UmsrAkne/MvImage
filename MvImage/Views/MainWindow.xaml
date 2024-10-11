@@ -21,6 +21,7 @@
 
     <Window.Resources>
         <converters:StringToDirectoryInfoConverter x:Key="StringToDirectoryInfoConverter" />
+        <converters:ImagePathConverter x:Key="ImagePathConverter" />
     </Window.Resources>
 
     <Grid>
@@ -99,7 +100,7 @@
         <Image
             Grid.Row="1"
             Grid.Column="2"
-            Source="{Binding FileListViewModel.PreviewImageFilePath, TargetNullValue={x:Null}}"
+            Source="{Binding FileListViewModel.PreviewImageFilePath, Converter={StaticResource ImagePathConverter}}"
             Visibility="{Binding FileListViewModel.PreviewImageVisibility}" />
 
         <Grid
