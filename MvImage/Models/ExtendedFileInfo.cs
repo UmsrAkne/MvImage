@@ -3,7 +3,7 @@ using Prism.Mvvm;
 
 namespace MvImage.Models
 {
-    public class ExtendedFileInfo : BindableBase
+    public class ExtendedFileInfo : BindableBase, IKeyed
     {
         private bool isChecked;
         private char keyCharacter;
