@@ -159,7 +159,8 @@
                 <TextBox
                     Width="40"
                     Margin="0,0,2,0"
-                    Text="{Binding FileListViewModel.DirectoryInfoInputArea.KeyCharacter}" />
+                    Text="{Binding FileListViewModel.DirectoryInfoInputArea.KeyCharacter}"
+                    TextAlignment="Center" />
             </StackPanel>
 
             <TextBox
