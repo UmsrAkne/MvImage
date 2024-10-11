@@ -1,6 +1,8 @@
+using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Microsoft.Xaml.Behaviors;
+using MvImage.Models;
 
 namespace MvImage.Behaviors
 {
@@ -44,6 +46,22 @@ namespace MvImage.Behaviors
             }
 
             lb.ScrollIntoView(lb.SelectedItem);
+
+            if (e.Key is Key.J or Key.K)
+            {
+                // key が j, k の場合はカーソル移動なので、ここで処理を中断する
+                return;
+            }
+
+            if (e.Key is < Key.A or > Key.Z)
+            {
+                return;
+            }
+
+            if (lb.SelectedItem is IKeyed item)
+            {
+                item.KeyCharacter = e.Key.ToString().ToLower().First();
+            }
         }
     }
 }
