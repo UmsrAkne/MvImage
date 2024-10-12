@@ -14,7 +14,6 @@ namespace MvImage.Views.Converters
             if (value is not string path)
             {
                 return null;
-
             }
 
             if (!File.Exists(path))
