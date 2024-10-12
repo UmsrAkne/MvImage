@@ -64,13 +64,15 @@ namespace MvImage.ViewModels
                 return;
             }
 
+            FileListViewModel.PreviewImageFilePath = string.Empty;
+
             var sameNames = fileSystem.Directory.GetFiles(parentDirectory)
                 .Where(s => Path.GetFileNameWithoutExtension(s) == Path.GetFileNameWithoutExtension(targetFilePath))
                 .ToList();
 
-            foreach (var fileName in sameNames.Select(Path.GetFileName))
+            foreach (var filePath in sameNames)
             {
-                fileSystem.File.Move(targetFilePath, $"{destinationDirectoryPath}\\{fileName}");
+                fileSystem.File.Move(filePath, $"{destinationDirectoryPath}\\{Path.GetFileName(filePath)}");
             }
         }
     }

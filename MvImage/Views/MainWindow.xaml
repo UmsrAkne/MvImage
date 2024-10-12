@@ -184,6 +184,7 @@
                 Grid.ColumnSpan="3"
                 Margin="5,12,5,5"
                 Padding="2"
+                Command="{Binding MoveFilesWithSameBaseNameCommand}"
                 Content="移動" />
 
         </Grid>
