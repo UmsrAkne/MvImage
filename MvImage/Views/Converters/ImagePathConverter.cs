@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using System.IO;
 using System.Windows.Data;
+using System.Windows.Media.Imaging;
 
 namespace MvImage.Views.Converters
 {
@@ -13,10 +14,20 @@ namespace MvImage.Views.Converters
             if (value is not string path)
             {
                 return null;
+
             }
 
-            // 存在しないパスを Image コントロールに返却すると例外がスローされるため、その場合は null を返す。
-            return !File.Exists(path) ? null : path;
+            if (!File.Exists(path))
+            {
+                return null;
+            }
+
+            var bitmap = new BitmapImage();
+            bitmap.BeginInit();
+            bitmap.CacheOption = BitmapCacheOption.OnLoad; // 画像をメモリにロードしてファイルをロックしない
+            bitmap.UriSource = new Uri(path);
+            bitmap.EndInit();
+            return bitmap;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
